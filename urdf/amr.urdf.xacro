@@ -1,17 +1,18 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="amr_robot">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="amr">
 
   <!-- 定义属性 -->
   <xacro:property name="base_color" value="0.5 0.5 0.5 1.0"/>
   <xacro:property name="stl_scale" value="0.001 0.001 0.001"/>
   <xacro:property name="base_link_mass" value="50.0"/>
+  <xacro:property name="lidar_color" value="1.0 0.0 0.0 1.0"/>  <!-- 激光雷达的颜色 -->
 
-  <!-- 虚拟根链接 (world) -->
-  <link name="world"/>
+  <!-- 虚拟根链接 (base_footprint) -->
+  <link name="base_footprint"/>
 
-  <!-- base_link 通过固定关节连接到 world -->
+  <!-- base_link 通过固定关节连接到 base_footprint -->
   <joint name="fixed_base" type="fixed">
-    <parent link="world"/>
+    <parent link="base_footprint"/>
     <child link="base_link"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>
@@ -37,5 +38,24 @@
       <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0"/>
     </inertial>
   </link>
+
+  <!-- 激光雷达 (lidar_link) -->
+  <link name="lidar_link">
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.1"/> <!-- 激光雷达简化为一个圆柱 -->
+      </geometry>
+      <material name="red">
+        <color rgba="${lidar_color}"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- lidar_link 通过固定关节连接到 base_link -->
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar_link"/>
+    <origin xyz="0.2 0 0.1" rpy="0 0 0"/> <!-- X=0.2: 雷达在前方0.2米, Z=0.1: 离地0.1米 -->
+  </joint>
 
 </robot>
