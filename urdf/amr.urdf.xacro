@@ -1,61 +1,186 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="amr">
 
-  <!-- 定义属性 -->
-  <xacro:property name="base_color" value="0.5 0.5 0.5 1.0"/>
-  <xacro:property name="stl_scale" value="0.001 0.001 0.001"/>
-  <xacro:property name="base_link_mass" value="50.0"/>
-  <xacro:property name="lidar_color" value="1.0 0.0 0.0 1.0"/>  <!-- 激光雷达的颜色 -->
+    <!-- 定义属性 -->
+    <!-- 定义 STL 比例，用于缩放 STL 文件的网格 -->
+    <xacro:property name="stl_scale" value="0.001 0.001 0.001"/>
+    <!-- 定义底盘的质量 (kg) -->
+    <xacro:property name="base_link_mass" value="50.0"/>
+    <!-- 定义各个部分的颜色: 底盘、驱动轮、万向轮、激光雷达 -->
+    <xacro:property name="base_color" value="0.5 0.5 0.5 1.0"/> <!-- 本体的颜色：灰色 -->
+    <xacro:property name="wheel_color" value="0.0 0.0 1.0 1.0"/> <!-- 左右驱动轮的颜色：蓝色 -->
+    <xacro:property name="caster_color" value="0.0 0.0 0.0 1.0"/> <!-- 前后万向轮的颜色：黑色 -->
+    <xacro:property name="lidar_color" value="1.0 0.0 0.0 1.0"/> <!-- 激光雷达的颜色：红色 -->
 
-  <!-- 虚拟根链接 (base_footprint) -->
-  <link name="base_footprint"/>
+    <!-- 虚拟根链接 (base_footprint) -->
+    <!-- base_footprint 是虚拟的参考框架，用来定义机器人在地面上的位置和姿态 -->
+    <link name="base_footprint">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" /> <!-- 定义根链接的原点位置和方向 -->
+            <geometry>
+                <box size="0.05 0.05 0.001" /> <!-- 定义一个小方块作为可视化形状 -->
+            </geometry>
+        </visual>
+    </link>
 
-  <!-- base_link 通过固定关节连接到 base_footprint -->
-  <joint name="fixed_base" type="fixed">
-    <parent link="base_footprint"/>
-    <child link="base_link"/>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-  </joint>
+    <!-- base_link 是底盘的主要框架，与虚拟根链接 base_footprint 通过固定关节连接 -->
+    <joint name="fixed_base" type="fixed">
+        <parent link="base_footprint"/> <!-- 连接到 base_footprint -->
+        <child link="base_link"/> <!-- base_link 作为子链接 -->
+        <origin xyz="0 0 0" rpy="0 0 0"/> <!-- 原点和旋转设置，保持位置和方向不变 -->
+    </joint>
 
-  <!-- 底盘 (base_link) -->
-  <link name="base_link">
-    <visual>
-      <geometry>
-        <mesh filename="package://amr_description/meshes/base_link.stl" scale="${stl_scale}"/>
-      </geometry>
-      <material name="grey">
-        <color rgba="${base_color}"/>
-      </material>
-    </visual>
-    <collision>
-      <geometry>
-        <mesh filename="package://amr_description/meshes/base_link.stl" scale="${stl_scale}"/>
-      </geometry>
-    </collision>
-    <inertial>
-      <mass value="${base_link_mass}"/>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0"/>
-    </inertial>
-  </link>
+    <!-- 底盘 (base_link) -->
+    <!-- 
+        参数说明:
+            - 形状: 长方体
+            - 尺寸: 长66.8厘米, 宽57.8厘米, 高18厘米
+            - 离地间隙: 2厘米
+            - STL 网格文件: base_link.stl
+    -->
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <box size="0.668 0.578 0.18"/> <!-- (虚拟环境)使用长方体定义底盘的形状 -->
+                <!-- <mesh filename="package://amr_description/meshes/base_link.stl" scale="${stl_scale}"/> -->
+            </geometry>
+            <material name="grey">
+                <color rgba="${base_color}"/> <!-- 设置底盘颜色 -->
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.668 0.578 0.18"/> <!-- (虚拟环境)与视觉形状一致，用于碰撞检测 -->
+                <!-- <mesh filename="package://amr_description/meshes/base_link.stl" scale="${stl_scale}"/> -->
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="${base_link_mass}"/> <!-- 定义底盘质量 -->
+            <origin xyz="0 0 0" rpy="0 0 0"/> <!-- 定义惯性原点为零点 -->
+            <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0"/> <!-- 简化的惯性张量参数 -->
+        </inertial>
+    </link>
 
-  <!-- 激光雷达 (lidar_link) -->
-  <link name="lidar_link">
-    <visual>
-      <geometry>
-        <cylinder length="0.05" radius="0.1"/> <!-- 激光雷达简化为一个圆柱 -->
-      </geometry>
-      <material name="red">
-        <color rgba="${lidar_color}"/>
-      </material>
-    </visual>
-  </link>
 
-  <!-- lidar_link 通过固定关节连接到 base_link -->
-  <joint name="lidar_joint" type="fixed">
-    <parent link="base_link"/>
-    <child link="lidar_link"/>
-    <origin xyz="0.2 0 0.1" rpy="0 0 0"/> <!-- X=0.2: 雷达在前方0.2米, Z=0.1: 离地0.1米 -->
-  </joint>
+    <!-- 左右驱动轮 -->
+    <!-- 
+        驱动轮采用侧翻的圆柱表示
+        参数说明:
+            - 半径: 9厘米
+            - 宽度: 4.5厘米
+            - 颜色: 黑色
+    -->
+    <link name="left_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="0.09" length="0.045" /> <!-- (虚拟环境)定义驱动轮为圆柱形 -->
+                <!-- <mesh filename="package://amr_description/meshes/left_wheel.stl" scale="${stl_scale}"/> -->
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/> <!-- 车轮的几何模型位于轮轴上 -->
+            <material name="black">
+                <color rgba="${wheel_color}"/> <!-- 设置轮子的颜色 -->
+            </material>
+        </visual>
+    </link>
+
+    <joint name="base_link_to_left_wheel" type="continuous"> <!-- 关节类型为 continuous 表示连续旋转 -->
+        <parent link="base_link" />
+        <child link="left_wheel" />
+        <origin xyz="0 0.213 0.02"/> <!-- 根据底盘和轮子尺寸设置左轮的位置和离地距离 -->
+        <axis xyz="0 1 0" /> <!-- 左轮沿 y 轴旋转 -->
+    </joint>
+
+    <link name="right_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="0.09" length="0.045" /> <!-- (虚拟环境)右轮的形状与左轮一致 -->
+                <!-- <mesh filename="package://amr_description/meshes/right_wheel.stl" scale="${stl_scale}"/> -->
+            </geometry>
+            <origin xyz="0 0 0" rpy="1.5708 0 0"/> <!-- 同样侧翻放置 -->
+            <material name="black">
+                <color rgba="${wheel_color}"/> <!-- 颜色设置一致 -->
+            </material>
+        </visual>
+    </link>
+
+    <joint name="base_link_to_right_wheel" type="continuous">
+        <parent link="base_link" />
+        <child link="right_wheel" />
+        <origin xyz="0 -0.213 0.02"/> <!-- 右轮的位置与左轮对称，但在 y 轴方向为负 -->
+        <axis xyz="0 1 0" /> <!-- 右轮沿 y 轴旋转 -->
+    </joint>
+
+    <!-- 前后万向轮 (支撑轮) -->
+    <!-- 
+        参数说明:
+            - 形状: 球体
+            - 半径: 2.5厘米
+            - 颜色: 黑色
+    -->
+    <link name="front_caster">
+        <visual>
+            <geometry>
+                <sphere radius="0.025" /> <!-- (虚拟环境)前万向轮的形状为球体 -->
+                <!-- <mesh filename="package://amr_description/meshes/front_caster.stl" scale="${stl_scale}"/> -->
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" /> <!-- 放置在底盘前方 -->
+            <material name="black">
+                <color rgba="${caster_color}"/> <!-- 设置前万向轮的颜色 -->
+            </material>
+        </visual>
+    </link>
+
+    <joint name="base_link_to_front_caster" type="continuous">
+        <parent link="base_link" />
+        <child link="front_caster" />
+        <origin xyz="0.264 0 -0.0731"/> <!-- 前万向轮放置在底盘前部，离地适中 -->
+        <axis xyz="0 0 1"/> <!-- 前万向轮自由旋转 -->
+    </joint>
+
+    <link name="back_caster">
+        <visual>
+            <geometry>
+                <sphere radius="0.025" /> <!-- (虚拟环境)后万向轮的形状为球体 -->
+                <!-- <mesh filename="package://amr_description/meshes/back_caster.stl" scale="${stl_scale}"/> -->
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" /> <!-- 放置在底盘后方 -->
+            <material name="black">
+                <color rgba="${caster_color}"/> <!-- 设置后万向轮的颜色 -->
+            </material>
+        </visual>
+    </link>
+
+    <joint name="base_link_to_back_caster" type="continuous">
+        <parent link="base_link" />
+        <child link="back_caster" />
+        <origin xyz="-0.264 0 -0.0731"/> <!-- 后万向轮放置在底盘后部，对称于前万向轮 -->
+        <axis xyz="0 0 1"/> <!-- 后万向轮自由旋转 -->
+    </joint>
+
+    <!-- 激光雷达 (lidar_link) -->
+    <!-- 
+        参数说明:
+            - 高度: 3.885厘米
+            - 半径: 7.7厘米
+    -->
+    <link name="lidar_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.03885" radius="0.077"/> <!-- (虚拟环境)激光雷达简化为一个圆柱体 -->
+                <mesh filename="package://amr_description/meshes/lidar_link.stl" scale="${stl_scale}"/>
+            </geometry>
+            <material name="red">
+                <color rgba="${lidar_color}"/>
+            </material>
+        </visual>
+    </link>
+
+    <!-- lidar_link 通过固定关节连接到 base_link -->
+    <joint name="lidar_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="lidar_link"/>
+        <origin xyz="0.2815 0 0.034" rpy="0 0 0"/>
+        <!-- X=0.2815: 雷达在前方0.2815米, Z=0.1625: 离 base_link 中心距离0.1625米 -->
+    </joint>
 
 </robot>
