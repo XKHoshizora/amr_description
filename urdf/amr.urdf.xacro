@@ -22,7 +22,7 @@
     <joint name="fixed_base" type="fixed">
         <parent link="base_footprint"/> <!-- 连接到 base_footprint -->
         <child link="base_link"/> <!-- base_link 作为子链接 -->
-        <origin xyz="0 0 0" rpy="0 0 0"/> <!-- 原点和旋转设置，保持位置和方向不变 -->
+        <origin xyz="0 0 0.02" rpy="0 0 0"/> <!-- 原点和旋转设置，保持位置和方向不变 -->
     </joint>
 
     <!-- 底盘 (base_link) -->
@@ -81,7 +81,7 @@
     <joint name="base_link_to_left_wheel" type="continuous"> <!-- 关节类型为 continuous 表示连续旋转 -->
         <parent link="base_link" />
         <child link="left_wheel" />
-        <origin xyz="0 0 0"/> <!-- 根据底盘和轮子尺寸设置左轮的位置和离地距离 -->
+        <origin xyz="0 0.23215 0.09"/> <!-- 根据底盘和轮子尺寸设置左轮的位置和离地距离 -->
         <axis xyz="0 1 0" /> <!-- 左轮沿 y 轴旋转 -->
     </joint>
 
@@ -100,7 +100,7 @@
     <joint name="base_link_to_right_wheel" type="continuous">
         <parent link="base_link" />
         <child link="right_wheel" />
-        <origin xyz="0 0 0"/>
+        <origin xyz="0 -0.23215 0.09"/>
         <axis xyz="0 1 0" /> <!-- 右轮沿 y 轴旋转 -->
     </joint>
 
@@ -116,7 +116,7 @@
             <geometry>
                 <mesh filename="package://amr_description/meshes/front_caster.stl" scale="${stl_scale}"/>
             </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0" /> <!-- 放置在底盘前方 -->
+            <origin xyz="0 0 0" rpy="0 0 0" />
             <material name="black">
                 <color rgba="${caster_color}"/> <!-- 设置前万向轮的颜色 -->
             </material>
@@ -126,7 +126,7 @@
     <joint name="base_link_to_front_caster" type="continuous">
         <parent link="base_link" />
         <child link="front_caster" />
-        <origin xyz="0 0 0"/> <!-- 前万向轮放置在底盘前部，离地适中 -->
+        <origin xyz="0.264 0 0.0399"/> <!-- 前万向轮放置在底盘前部，离地适中 -->
         <axis xyz="0 0 1"/> <!-- 前万向轮自由旋转 -->
     </joint>
 
@@ -135,7 +135,7 @@
             <geometry>
                 <mesh filename="package://amr_description/meshes/back_caster.stl" scale="${stl_scale}"/>
             </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0"/> <!-- 放置在底盘后方 -->
+            <origin xyz="0 0 0" rpy="0 0 0"/>
             <material name="black">
                 <color rgba="${caster_color}"/> <!-- 设置后万向轮的颜色 -->
             </material>
@@ -145,7 +145,7 @@
     <joint name="base_link_to_back_caster" type="continuous">
         <parent link="base_link" />
         <child link="back_caster" />
-        <origin xyz="0 0 0"/> <!-- 后万向轮放置在底盘后部，对称于前万向轮 -->
+        <origin xyz="-0.264 0 0.0399"/> <!-- 后万向轮放置在底盘后部，对称于前万向轮 -->
         <axis xyz="0 0 1"/> <!-- 后万向轮自由旋转 -->
     </joint>
 
@@ -171,7 +171,7 @@
     <joint name="lidar_joint" type="fixed">
         <parent link="base_link"/>
         <child link="lidar_link"/>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="0.2815 0 0.144" rpy="0 0 0"/>
     </joint>
 
 </robot>
