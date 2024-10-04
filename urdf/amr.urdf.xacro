@@ -86,7 +86,7 @@
     <joint name="base_link_to_left_wheel" type="continuous"> <!-- 关节类型为 continuous 表示连续旋转 -->
         <parent link="base_link" />
         <child link="left_wheel" />
-        <origin xyz="0 0.213 0.02"/> <!-- 根据底盘和轮子尺寸设置左轮的位置和离地距离 -->
+        <origin xyz="0 0 0"/> <!-- 根据底盘和轮子尺寸设置左轮的位置和离地距离 -->
         <axis xyz="0 1 0" /> <!-- 左轮沿 y 轴旋转 -->
     </joint>
 
@@ -96,7 +96,7 @@
                 <!-- <cylinder radius="0.09" length="0.045" /> (虚拟环境)右轮的形状与左轮一致 -->
                 <mesh filename="package://amr_description/meshes/right_wheel.stl" scale="${stl_scale}"/>
             </geometry>
-            <origin xyz="0 0 0" rpy="1.5708 0 0"/> <!-- 同样侧翻放置 -->
+            <origin xyz="0 0 0" rpy="0 0 0"/> <!-- 同样侧翻放置 -->
             <material name="black">
                 <color rgba="${wheel_color}"/> <!-- 颜色设置一致 -->
             </material>
@@ -106,7 +106,7 @@
     <joint name="base_link_to_right_wheel" type="continuous">
         <parent link="base_link" />
         <child link="right_wheel" />
-        <origin xyz="0 -0.213 0.02"/> <!-- 右轮的位置与左轮对称，但在 y 轴方向为负 -->
+        <origin xyz="0 0 0"/> <!-- 右轮的位置与左轮对称，但在 y 轴方向为负 -->
         <axis xyz="0 1 0" /> <!-- 右轮沿 y 轴旋转 -->
     </joint>
 
@@ -179,7 +179,7 @@
     <joint name="lidar_joint" type="fixed">
         <parent link="base_link"/>
         <child link="lidar_link"/>
-        <origin xyz="0.2815 0 0.034" rpy="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <!-- X=0.2815: 雷达在前方0.2815米, Z=0.1625: 离 base_link 中心距离0.1625米 -->
     </joint>
 
