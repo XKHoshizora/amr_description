@@ -8,7 +8,7 @@
     <xacro:property name="base_link_mass" value="50.0"/>
     <!-- 定义各个部分的颜色: 底盘、驱动轮、万向轮、激光雷达 -->
     <xacro:property name="base_color" value="0.5 0.5 0.5 1.0"/> <!-- 本体的颜色：灰色 -->
-    <xacro:property name="wheel_color" value="0.0 0.0 1.0 1.0"/> <!-- 左右驱动轮的颜色：蓝色 -->
+    <xacro:property name="wheel_color" value="0.0 0.0 0.0 1.0"/> <!-- 左右驱动轮的颜色：黑色 -->
     <xacro:property name="caster_color" value="0.0 0.0 0.0 1.0"/> <!-- 前后万向轮的颜色：黑色 -->
     <xacro:property name="lidar_color" value="1.0 0.0 0.0 1.0"/> <!-- 激光雷达的颜色：红色 -->
 
@@ -41,8 +41,8 @@
     <link name="base_link">
         <visual>
             <geometry>
-                <box size="0.668 0.578 0.18"/> <!-- (虚拟环境)使用长方体定义底盘的形状 -->
-                <!-- <mesh filename="package://amr_description/meshes/base_link.stl" scale="${stl_scale}"/> -->
+                <!-- <box size="0.668 0.578 0.18"/> (虚拟环境)使用长方体定义底盘的形状 -->
+                <mesh filename="package://amr_description/meshes/base_link.stl" scale="${stl_scale}"/>
             </geometry>
             <material name="grey">
                 <color rgba="${base_color}"/> <!-- 设置底盘颜色 -->
