@@ -15,14 +15,22 @@
     <!-- 虚拟根链接 (base_footprint) -->
     <!-- base_footprint 是虚拟的参考框架，用来定义机器人在地面上的位置和姿态 -->
     <link name="base_footprint">
-        <!-- 可省略visual部分，使其仅作为参考框架 -->
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <box size="0.05 0.05 0.001" />
+            </geometry>
+            <material name="transparent">
+                <color rgba="0.0 0.0 0.0 0.0"/> <!-- 设置底盘颜色 -->
+            </material>
+        </visual>
     </link>
 
     <!-- base_link 是底盘的主要框架，与虚拟根链接 base_footprint 通过固定关节连接 -->
     <joint name="fixed_base" type="fixed">
         <parent link="base_footprint"/> <!-- 连接到 base_footprint -->
         <child link="base_link"/> <!-- base_link 作为子链接 -->
-        <origin xyz="0 0 0.02" rpy="0 0 0"/> <!-- 原点和旋转设置，保持位置和方向不变 -->
+        <origin xyz="0 0 0" rpy="0 0 0"/> <!-- 原点和旋转设置，保持位置和方向不变 -->
     </joint>
 
     <!-- 底盘 (base_link) -->
