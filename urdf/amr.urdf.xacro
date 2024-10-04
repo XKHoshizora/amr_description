@@ -50,8 +50,8 @@
         </visual>
         <collision>
             <geometry>
-                <box size="0.668 0.578 0.18"/> <!-- (虚拟环境)与视觉形状一致，用于碰撞检测 -->
-                <!-- <mesh filename="package://amr_description/meshes/base_link.stl" scale="${stl_scale}"/> -->
+                <!-- <box size="0.668 0.578 0.18"/> (虚拟环境)与视觉形状一致，用于碰撞检测 -->
+                <mesh filename="package://amr_description/meshes/base_link.stl" scale="${stl_scale}"/>
             </geometry>
         </collision>
         <inertial>
@@ -73,8 +73,8 @@
     <link name="left_wheel">
         <visual>
             <geometry>
-                <cylinder radius="0.09" length="0.045" /> <!-- (虚拟环境)定义驱动轮为圆柱形 -->
-                <!-- <mesh filename="package://amr_description/meshes/left_wheel.stl" scale="${stl_scale}"/> -->
+                <!-- <cylinder radius="0.09" length="0.045" /> (虚拟环境)定义驱动轮为圆柱形 -->
+                <mesh filename="package://amr_description/meshes/left_wheel.stl" scale="${stl_scale}"/>
             </geometry>
             <origin xyz="0 0 0" rpy="0 0 0"/> <!-- 车轮的几何模型位于轮轴上 -->
             <material name="black">
@@ -93,8 +93,8 @@
     <link name="right_wheel">
         <visual>
             <geometry>
-                <cylinder radius="0.09" length="0.045" /> <!-- (虚拟环境)右轮的形状与左轮一致 -->
-                <!-- <mesh filename="package://amr_description/meshes/right_wheel.stl" scale="${stl_scale}"/> -->
+                <!-- <cylinder radius="0.09" length="0.045" /> (虚拟环境)右轮的形状与左轮一致 -->
+                <mesh filename="package://amr_description/meshes/right_wheel.stl" scale="${stl_scale}"/>
             </geometry>
             <origin xyz="0 0 0" rpy="1.5708 0 0"/> <!-- 同样侧翻放置 -->
             <material name="black">
@@ -166,7 +166,7 @@
     <link name="lidar_link">
         <visual>
             <geometry>
-                <cylinder length="0.03885" radius="0.077"/> <!-- (虚拟环境)激光雷达简化为一个圆柱体 -->
+                <!-- <cylinder length="0.03885" radius="0.077"/> (虚拟环境)激光雷达简化为一个圆柱体 -->
                 <mesh filename="package://amr_description/meshes/lidar_link.stl" scale="${stl_scale}"/>
             </geometry>
             <material name="red">
