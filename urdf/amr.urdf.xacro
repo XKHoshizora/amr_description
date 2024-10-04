@@ -203,7 +203,7 @@
     <joint name="front_fork_to_front_caster" type="continuous">
         <parent link="front_fork" />
         <child link="front_caster" />
-        <origin xyz="0.252 0 0.016"/> <!-- 前万向轮放置在底盘前部，离地适中 -->
+        <origin xyz="-0.012 0 -0.0239"/> <!-- 前万向轮放置在底盘前部，离地适中 -->
         <axis xyz="0 1 0"/> <!-- 前万向轮自由旋转 -->
     </joint>
 
@@ -228,7 +228,7 @@
     <joint name="back_fork_to_back_caster" type="continuous">
         <parent link="back_fork" />
         <child link="back_caster" />
-        <origin xyz="-0.276 0 0.016"/> <!-- 后万向轮放置在底盘后部，对称于前万向轮 -->
+        <origin xyz="-0.012 0 -0.0239"/> <!-- 后万向轮放置在底盘后部，对称于前万向轮 -->
         <axis xyz="0 1 0"/> <!-- 后万向轮自由旋转 -->
     </joint>
 
