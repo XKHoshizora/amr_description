@@ -68,6 +68,8 @@
             - 半径: 9厘米
             - 宽度: 4.5厘米
             - 颜色: 黑色
+            - STL 网格文件: left_wheel.stl
+                           right_wheel.stl
     -->
     <link name="left_wheel">
         <visual>
@@ -111,6 +113,8 @@
     <!-- 
         参数说明:
             - 颜色: 黑色
+            - STL 网格文件: front_caster.stl
+                            back_caster.stl
     -->
     <link name="front_caster">
         <visual>
@@ -136,7 +140,7 @@
             <geometry>
                 <mesh filename="package://amr_description/meshes/back_caster.stl" scale="${stl_scale}"/>
             </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0" /> <!-- 放置在底盘后方 -->
+            <origin xyz="0 0 0" rpy="0 0 0"/> <!-- 放置在底盘后方 -->
             <material name="black">
                 <color rgba="${caster_color}"/> <!-- 设置后万向轮的颜色 -->
             </material>
@@ -155,6 +159,7 @@
         参数说明:
             - 高度: 3.885厘米
             - 半径: 7.7厘米
+            - STL 网格文件: lidar_link.stl
     -->
     <link name="lidar_link">
         <visual>
@@ -172,4 +177,6 @@
         <parent link="base_link"/>
         <child link="lidar_link"/>
         <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
 </robot>
