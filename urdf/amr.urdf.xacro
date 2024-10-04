@@ -232,17 +232,17 @@
         <axis xyz="0 1 0"/> <!-- 后万向轮自由旋转 -->
     </joint>
 
-    <!-- 激光雷达 (lidar_link) -->
+    <!-- 激光雷达 (laser) -->
     <!-- 
         参数说明:
             - 高度: 3.885厘米
             - 半径: 7.7厘米
-            - STL 网格文件: lidar_link.stl
+            - STL 网格文件: laser.stl
     -->
-    <link name="lidar_link">
+    <link name="laser">
         <visual>
             <geometry>
-                <mesh filename="package://amr_description/meshes/lidar_link.stl" scale="${stl_scale}"/>
+                <mesh filename="package://amr_description/meshes/laser.stl" scale="${stl_scale}"/>
             </geometry>
             <material name="black">
                 <color rgba="${lidar_color}"/>
@@ -251,15 +251,15 @@
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="package://amr_description/meshes/lidar_link.stl" scale="${stl_scale}"/>
+                <mesh filename="package://amr_description/meshes/laser.stl" scale="${stl_scale}"/>
             </geometry>
         </collision>
     </link>
 
-    <!-- lidar_link 通过固定关节连接到 base_link -->
-    <joint name="lidar_joint" type="fixed">
+    <!-- laser 通过固定关节连接到 base_link -->
+    <joint name="base_link_to_laser" type="fixed">
         <parent link="base_link"/>
-        <child link="lidar_link"/>
+        <child link="laser"/>
         <origin xyz="0.2815 0 0.144" rpy="0 0 0"/>
     </joint>
 
