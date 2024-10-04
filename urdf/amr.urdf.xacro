@@ -76,6 +76,12 @@
                 <color rgba="${wheel_color}"/> <!-- 设置轮子的颜色 -->
             </material>
         </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://amr_description/meshes/left_wheel.stl" scale="${stl_scale}"/>
+            </geometry>
+        </collision>
     </link>
 
     <joint name="base_link_to_left_wheel" type="continuous"> <!-- 关节类型为 continuous 表示连续旋转 -->
@@ -95,6 +101,12 @@
                 <color rgba="${wheel_color}"/> <!-- 颜色设置一致 -->
             </material>
         </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://amr_description/meshes/right_wheel.stl" scale="${stl_scale}"/>
+            </geometry>
+        </collision>
     </link>
 
     <joint name="base_link_to_right_wheel" type="continuous">
@@ -102,6 +114,65 @@
         <child link="right_wheel" />
         <origin xyz="0 -0.23215 0.09"/>
         <axis xyz="0 1 0" /> <!-- 右轮沿 y 轴旋转 -->
+    </joint>
+
+
+    <!-- 前后万向轮叉架 -->
+    <link name="front_fork">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/> <!-- 叉架的中心位置 -->
+                <geometry>
+                    <mesh filename="package://amr_description/meshes/front_fork.stl" scale="${stl_scale}"/>
+                </geometry>
+            <material name="grey"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://amr_description/meshes/front_fork.stl" scale="${stl_scale}"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.5"/> <!-- 叉架的质量 -->
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <inertia ixx="0.002" iyy="0.002" izz="0.002" ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+    </link>
+
+    <!-- 万向节的 joint -->
+    <joint name="base_link_to_front_fork" type="continuous">
+        <parent link="base_link"/> <!-- 父链接为车体 -->
+        <child link="front_fork"/> <!-- 子链接为叉架 -->
+        <origin xyz="0.264 0 0.0399" rpy="0 0 0"/> <!-- 叉架相对于车体的原点和姿态 -->
+        <axis xyz="0 0 1"/> <!-- 允许叉架围绕 Z 轴自由旋转（万向功能） -->
+    </joint>
+
+    <link name="back_fork">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/> <!-- 叉架的中心位置 -->
+                <geometry>
+                    <mesh filename="package://amr_description/meshes/back_fork.stl" scale="${stl_scale}"/>
+                </geometry>
+            <material name="grey"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://amr_description/meshes/back_fork.stl" scale="${stl_scale}"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.5"/> <!-- 叉架的质量 -->
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <inertia ixx="0.002" iyy="0.002" izz="0.002" ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+    </link>
+
+    <joint name="base_link_to_back_fork" type="continuous">
+        <parent link="base_link"/> <!-- 父链接为车体 -->
+        <child link="back_fork"/> <!-- 子链接为叉架 -->
+        <origin xyz="-0.264 0 0.0399" rpy="0 0 0"/> <!-- 叉架相对于车体的原点和姿态 -->
+        <axis xyz="0 0 1"/> <!-- 允许叉架围绕 Z 轴自由旋转（万向功能） -->
     </joint>
 
     <!-- 前后万向轮 (支撑轮) -->
@@ -121,13 +192,19 @@
                 <color rgba="${caster_color}"/> <!-- 设置前万向轮的颜色 -->
             </material>
         </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://amr_description/meshes/front_caster.stl" scale="${stl_scale}"/>
+            </geometry>
+        </collision>
     </link>
 
-    <joint name="base_link_to_front_caster" type="continuous">
-        <parent link="base_link" />
+    <joint name="front_fork_to_front_caster" type="continuous">
+        <parent link="front_fork" />
         <child link="front_caster" />
-        <origin xyz="0.264 0 0.0399"/> <!-- 前万向轮放置在底盘前部，离地适中 -->
-        <axis xyz="0 0 1"/> <!-- 前万向轮自由旋转 -->
+        <origin xyz="0.252 0 0.016"/> <!-- 前万向轮放置在底盘前部，离地适中 -->
+        <axis xyz="0 1 0"/> <!-- 前万向轮自由旋转 -->
     </joint>
 
     <link name="back_caster">
@@ -140,13 +217,19 @@
                 <color rgba="${caster_color}"/> <!-- 设置后万向轮的颜色 -->
             </material>
         </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://amr_description/meshes/back_caster.stl" scale="${stl_scale}"/>
+            </geometry>
+        </collision>
     </link>
 
-    <joint name="base_link_to_back_caster" type="continuous">
-        <parent link="base_link" />
+    <joint name="back_fork_to_back_caster" type="continuous">
+        <parent link="back_fork" />
         <child link="back_caster" />
-        <origin xyz="-0.264 0 0.0399"/> <!-- 后万向轮放置在底盘后部，对称于前万向轮 -->
-        <axis xyz="0 0 1"/> <!-- 后万向轮自由旋转 -->
+        <origin xyz="-0.276 0 0.016"/> <!-- 后万向轮放置在底盘后部，对称于前万向轮 -->
+        <axis xyz="0 1 0"/> <!-- 后万向轮自由旋转 -->
     </joint>
 
     <!-- 激光雷达 (lidar_link) -->
@@ -165,6 +248,12 @@
                 <color rgba="${lidar_color}"/>
             </material>
         </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <mesh filename="package://amr_description/meshes/lidar_link.stl" scale="${stl_scale}"/>
+            </geometry>
+        </collision>
     </link>
 
     <!-- lidar_link 通过固定关节连接到 base_link -->
