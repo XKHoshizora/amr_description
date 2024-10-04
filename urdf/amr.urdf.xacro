@@ -27,7 +27,7 @@
     </link>
 
     <!-- base_link 是底盘的主要框架，与虚拟根链接 base_footprint 通过固定关节连接 -->
-    <joint name="fixed_base" type="fixed">
+    <joint name="base_joint" type="fixed">
         <parent link="base_footprint"/> <!-- 连接到 base_footprint -->
         <child link="base_link"/> <!-- base_link 作为子链接 -->
         <origin xyz="0 0 0" rpy="0 0 0"/> <!-- 原点和旋转设置，保持位置和方向不变 -->
