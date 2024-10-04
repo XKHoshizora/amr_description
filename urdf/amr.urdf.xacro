@@ -16,9 +16,6 @@
     <!-- base_footprint 是虚拟的参考框架，用来定义机器人在地面上的位置和姿态 -->
     <link name="base_footprint">
         <!-- 可省略visual部分，使其仅作为参考框架 -->
-        <visual>
-            <origin xyz="0 0 0" rpy="0 0 0" /> <!-- 定义根链接的原点位置和方向 -->
-        </visual>
     </link>
 
     <!-- base_link 是底盘的主要框架，与虚拟根链接 base_footprint 通过固定关节连接 -->
