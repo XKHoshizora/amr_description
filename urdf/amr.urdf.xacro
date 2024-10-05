@@ -4,8 +4,6 @@
     <!-- 定义属性 -->
     <!-- 定义 STL 比例，用于缩放 STL 文件的网格 -->
     <xacro:property name="stl_scale" value="0.001 0.001 0.001"/>
-    <!-- 定义底盘的质量 (kg) -->
-    <xacro:property name="base_link_mass" value="50.0"/>
     <!-- 定义各个部分的颜色: 底盘、驱动轮、万向轮、激光雷达 -->
     <xacro:property name="base_color" value="0.5 0.5 0.5 1.0"/> <!-- 本体的颜色：灰色 -->
     <xacro:property name="wheel_color" value="0.7 0.2 0.2 1.0"/> <!-- 左右驱动轮的颜色：红色 -->
@@ -20,9 +18,6 @@
             <geometry>
                 <box size="0.05 0.05 0.001" />
             </geometry>
-            <material name="transparent">
-                <color rgba="0.0 0.0 0.0 0.0"/> <!-- 设置底盘颜色 -->
-            </material>
         </visual>
     </link>
 
@@ -57,11 +52,6 @@
                 <mesh filename="package://amr_description/meshes/base_link.stl" scale="${stl_scale}"/>
             </geometry>
         </collision>
-        <inertial>
-            <mass value="${base_link_mass}"/> <!-- 定义底盘质量 -->
-            <origin xyz="0 0 0" rpy="0 0 0"/> <!-- 定义惯性原点为零点 -->
-            <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0"/> <!-- 简化的惯性张量参数 -->
-        </inertial>
     </link>
 
 
