@@ -236,7 +236,7 @@
     <joint name="base_link_to_laser" type="fixed">
         <parent link="base_link"/>
         <child link="laser"/>
-        <origin xyz="0.2815 0 0.17223265" rpy="0 0 3.14159265"/> <!-- 激光雷达相对于车体的原点和姿态 -->
+        <origin xyz="0.2815 0 0.15223265" rpy="0 0 3.14159265"/> <!-- 激光雷达相对于车体的原点和姿态 -->
     </joint>
 
 </robot>
