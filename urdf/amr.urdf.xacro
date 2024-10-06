@@ -25,7 +25,7 @@
     <joint name="base_footprint_to_base_link" type="fixed">
         <parent link="base_footprint"/> <!-- 连接到 base_footprint -->
         <child link="base_link"/> <!-- base_link 作为子链接 -->
-        <origin xyz="0 0 0" rpy="0 0 0"/> <!-- 原点和旋转设置，保持位置和方向不变 -->
+        <origin xyz="0 0 0.02" rpy="0 0 0"/> <!-- 原点和旋转设置，保持位置和方向不变 -->
     </joint>
 
     <!-- 底盘 (base_link) -->
@@ -69,13 +69,11 @@
             <geometry>
                 <mesh filename="package://amr_description/meshes/left_wheel.stl" scale="${stl_scale}"/>
             </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0"/> <!-- 车轮的几何模型位于轮轴上 -->
             <material name="red">
                 <color rgba="${wheel_color}"/> <!-- 设置轮子的颜色 -->
             </material>
         </visual>
         <collision>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
                 <mesh filename="package://amr_description/meshes/left_wheel.stl" scale="${stl_scale}"/>
             </geometry>
@@ -94,13 +92,11 @@
             <geometry>
                 <mesh filename="package://amr_description/meshes/right_wheel.stl" scale="${stl_scale}"/>
             </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
             <material name="red">
                 <color rgba="${wheel_color}"/> <!-- 颜色设置一致 -->
             </material>
         </visual>
         <collision>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
                 <mesh filename="package://amr_description/meshes/right_wheel.stl" scale="${stl_scale}"/>
             </geometry>
@@ -118,23 +114,16 @@
     <!-- 前后万向轮叉架 -->
     <link name="front_fork">
         <visual>
-            <origin xyz="0 0 0" rpy="0 0 0"/> <!-- 叉架的中心位置 -->
-                <geometry>
-                    <mesh filename="package://amr_description/meshes/front_fork.stl" scale="${stl_scale}"/>
-                </geometry>
+            <geometry>
+                <mesh filename="package://amr_description/meshes/front_fork.stl" scale="${stl_scale}"/>
+            </geometry>
             <material name="grey"/>
         </visual>
         <collision>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
                 <mesh filename="package://amr_description/meshes/front_fork.stl" scale="${stl_scale}"/>
             </geometry>
         </collision>
-        <inertial>
-            <mass value="0.5"/> <!-- 叉架的质量 -->
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <inertia ixx="0.002" iyy="0.002" izz="0.002" ixy="0" ixz="0" iyz="0"/>
-        </inertial>
     </link>
 
     <!-- 万向节的 joint -->
@@ -147,23 +136,16 @@
 
     <link name="back_fork">
         <visual>
-            <origin xyz="0 0 0" rpy="0 0 0"/> <!-- 叉架的中心位置 -->
-                <geometry>
-                    <mesh filename="package://amr_description/meshes/back_fork.stl" scale="${stl_scale}"/>
-                </geometry>
+            <geometry>
+                <mesh filename="package://amr_description/meshes/back_fork.stl" scale="${stl_scale}"/>
+            </geometry>
             <material name="grey"/>
         </visual>
         <collision>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
                 <mesh filename="package://amr_description/meshes/back_fork.stl" scale="${stl_scale}"/>
             </geometry>
         </collision>
-        <inertial>
-            <mass value="0.5"/> <!-- 叉架的质量 -->
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <inertia ixx="0.002" iyy="0.002" izz="0.002" ixy="0" ixz="0" iyz="0"/>
-        </inertial>
     </link>
 
     <joint name="base_link_to_back_fork" type="continuous">
@@ -185,13 +167,11 @@
             <geometry>
                 <mesh filename="package://amr_description/meshes/front_caster.stl" scale="${stl_scale}"/>
             </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0" />
             <material name="black">
                 <color rgba="${caster_color}"/> <!-- 设置前万向轮的颜色 -->
             </material>
         </visual>
         <collision>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
                 <mesh filename="package://amr_description/meshes/front_caster.stl" scale="${stl_scale}"/>
             </geometry>
@@ -210,13 +190,11 @@
             <geometry>
                 <mesh filename="package://amr_description/meshes/back_caster.stl" scale="${stl_scale}"/>
             </geometry>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
             <material name="black">
                 <color rgba="${caster_color}"/> <!-- 设置后万向轮的颜色 -->
             </material>
         </visual>
         <collision>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
                 <mesh filename="package://amr_description/meshes/back_caster.stl" scale="${stl_scale}"/>
             </geometry>
@@ -247,7 +225,6 @@
             </material>
         </visual>
         <collision>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
                 <mesh filename="package://amr_description/meshes/laser.stl" scale="${stl_scale}"/>
             </geometry>
