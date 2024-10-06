@@ -38,6 +38,7 @@
     -->
     <link name="base_link">
         <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
                 <!-- 视觉形状 -->
                 <mesh filename="package://amr_description/meshes/base_link.stl" scale="${stl_scale}"/>
