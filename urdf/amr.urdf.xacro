@@ -25,7 +25,7 @@
     <joint name="base_footprint_to_base_link" type="fixed">
         <parent link="base_footprint"/> <!-- 连接到 base_footprint -->
         <child link="base_link"/> <!-- base_link 作为子链接 -->
-        <origin xyz="0 0 0" rpy="0 0 0"/> <!-- 原点和旋转设置 -->
+        <origin xyz="0 0 0" rpy="0 0 ${pi}"/> <!-- 原点和旋转设置 -->
     </joint>
 
     <!-- 底盘 (base_link) -->
