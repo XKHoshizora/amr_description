@@ -218,7 +218,6 @@
     -->
     <link name="laser">
         <visual>
-            <origin xyz="0 0 0" rpy="0 0 3.1415926"/>
             <geometry>
                 <mesh filename="package://amr_description/meshes/laser.stl" scale="${stl_scale}"/>
             </geometry>
@@ -227,7 +226,6 @@
             </material>
         </visual>
         <collision>
-            <origin xyz="0 0 0" rpy="0 0 3.1415926"/>
             <geometry>
                 <mesh filename="package://amr_description/meshes/laser.stl" scale="${stl_scale}"/>
             </geometry>
