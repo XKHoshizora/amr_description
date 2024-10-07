@@ -9,6 +9,7 @@
     <xacro:property name="wheel_color" value="0.7 0.2 0.2 1.0"/> <!-- 左右驱动轮的颜色：红色 -->
     <xacro:property name="caster_color" value="0.0 0.0 0.0 1.0"/> <!-- 前后万向轮的颜色：黑色 -->
     <xacro:property name="lidar_color" value="0.0 0.0 0.0 1.0"/> <!-- 激光雷达的颜色：黑色 -->
+    <xacro:property name="imu_color" value="0.0 0.0 1.0 1.0"/> <!-- 惯性测量单元的颜色：蓝色 -->
 
     <!-- 虚拟根链接 (base_footprint) -->
     <!-- base_footprint 是虚拟的参考框架，用来定义机器人在地面上的位置和姿态 -->
@@ -237,6 +238,37 @@
         <parent link="base_link"/>
         <child link="laser"/>
         <origin xyz="0.2815 0 0.17223265" rpy="0 0 ${pi}"/> <!-- 激光雷达相对于车体的原点和姿态 -->
+    </joint>
+
+    <!-- 惯性测量单元 (imu) -->
+    <!-- 
+        参数说明:
+            - 长度: 7.5厘米
+            - 宽度: 6.5厘米
+            - 高度: 1.5厘米
+    -->
+    <link name="imu">
+        <visual>
+            <origin xyz="0 0 0"/>
+            <geometry>
+                <box size="0.075 0.065 0.015"/>  <!-- 设定IMU的尺寸，单位为米 -->
+            </geometry>
+            <material name="blue">
+                <color rgba="${imu_color}"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.075 0.065 0.015"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- imu 通过固定关节连接到 base_link -->
+    <joint name="base_link_to_imu" type="fixed">
+        <parent link="base_link"/>
+        <child link="laser"/>
+        <origin xyz="0.2575 0.1025 0.015" rpy="0 0 0"/> <!-- 激光雷达相对于车体的原点和姿态 -->
     </joint>
 
 </robot>
