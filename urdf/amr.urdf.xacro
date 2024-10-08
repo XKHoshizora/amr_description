@@ -267,7 +267,7 @@
     <!-- imu 通过固定关节连接到 base_link -->
     <joint name="base_link_to_imu" type="fixed">
         <parent link="base_link"/>
-        <child link="laser"/>
+        <child link="imu"/>
         <origin xyz="0.2575 0.1025 0.015" rpy="0 0 0"/> <!-- 激光雷达相对于车体的原点和姿态 -->
     </joint>
 
