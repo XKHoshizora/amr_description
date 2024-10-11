@@ -14,7 +14,7 @@
     <!-- base_footprint 是虚拟的参考框架，用来定义机器人在地面上的位置和姿态 -->
     <link name="base_footprint">
         <visual>
-            <origin xyz="0 0 0" rpy="0 0 0" />
+            <origin xyz="0 0 0.02" rpy="0 0 0" />
             <geometry>
                 <box size="0.05 0.05 0.001" />
             </geometry>
