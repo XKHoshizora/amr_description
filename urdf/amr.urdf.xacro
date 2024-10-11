@@ -26,7 +26,7 @@
     <joint name="base_footprint_to_base_link" type="fixed">
         <parent link="base_footprint"/> <!-- 连接到 base_footprint -->
         <child link="base_link"/> <!-- base_link 作为子链接 -->
-        <origin xyz="0 0 0" rpy="0 0 0"/> <!-- 原点和旋转设置 -->
+        <origin xyz="0 0 0.02" rpy="0 0 0"/> <!-- 原点和旋转设置 -->
     </joint>
 
     <!-- 底盘 (base_link) -->
@@ -39,7 +39,7 @@
     -->
     <link name="base_link">
         <visual>
-            <origin xyz="0 0 0.02" rpy="0 0 0" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
                 <!-- 视觉形状 -->
                 <mesh filename="package://amr_description/meshes/base_link.stl" scale="${stl_scale}"/>
@@ -239,36 +239,3 @@
         <child link="laser"/>
         <origin xyz="0.2815 0 0.17223265" rpy="0 0 ${pi}"/> <!-- 激光雷达相对于车体的原点和姿态 -->
     </joint>
-
-    <!-- 惯性测量单元 (imu) -->
-    <!-- 
-        参数说明:
-            - 长度: 7.5厘米
-            - 宽度: 6.5厘米
-            - 高度: 1.5厘米
-    -->
-    <link name="imu">
-        <visual>
-            <origin xyz="0 0 0"/>
-            <geometry>
-                <box size="0.075 0.065 0.015"/>  <!-- 设定IMU的尺寸，单位为米 -->
-            </geometry>
-            <material name="blue">
-                <color rgba="${imu_color}"/>
-            </material>
-        </visual>
-        <collision>
-            <geometry>
-                <box size="0.075 0.065 0.015"/>
-            </geometry>
-        </collision>
-    </link>
-
-    <!-- imu 通过固定关节连接到 base_link -->
-    <joint name="base_link_to_imu" type="fixed">
-        <parent link="base_link"/>
-        <child link="imu"/>
-        <origin xyz="0.2575 0.1025 0.035" rpy="0 0 0"/> <!-- 激光雷达相对于车体的原点和姿态 -->
-    </joint>
-
-</robot>
