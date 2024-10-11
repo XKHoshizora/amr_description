@@ -238,3 +238,5 @@
         <child link="laser"/>
         <origin xyz="0.2815 0 0.17223265" rpy="0 0 ${pi}"/> <!-- 激光雷达相对于车体的原点和姿态 -->
     </joint>
+
+</robot>
