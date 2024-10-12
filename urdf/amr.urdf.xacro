@@ -84,7 +84,7 @@
     <joint name="base_link_to_left_wheel" type="continuous"> <!-- 关节类型为 continuous 表示连续旋转 -->
         <parent link="base_link" />
         <child link="left_wheel" />
-        <origin xyz="0 0.23215 0.07"/> <!-- 根据底盘和轮子尺寸设置左轮的位置和离地距离 -->
+        <origin xyz="0 0.23215 0.09"/> <!-- 根据底盘和轮子尺寸设置左轮的位置和离地距离 -->
         <axis xyz="0 1 0" /> <!-- 左轮沿 y 轴旋转 -->
     </joint>
 
@@ -107,7 +107,7 @@
     <joint name="base_link_to_right_wheel" type="continuous">
         <parent link="base_link" />
         <child link="right_wheel" />
-        <origin xyz="0 -0.23215 0.07"/>
+        <origin xyz="0 -0.23215 0.09"/>
         <axis xyz="0 1 0" /> <!-- 右轮沿 y 轴旋转 -->
     </joint>
 
@@ -131,7 +131,7 @@
     <joint name="base_link_to_front_fork" type="continuous">
         <parent link="base_link"/> <!-- 父链接为车体 -->
         <child link="front_fork"/> <!-- 子链接为叉架 -->
-        <origin xyz="0.264 0 0.0169" rpy="0 0 0"/> <!-- 叉架相对于车体的原点和姿态 -->
+        <origin xyz="0.264 0 0.0369" rpy="0 0 0"/> <!-- 叉架相对于车体的原点和姿态 -->
         <axis xyz="0 0 1"/> <!-- 允许叉架围绕 Z 轴自由旋转（万向功能） -->
     </joint>
 
@@ -152,7 +152,7 @@
     <joint name="base_link_to_back_fork" type="continuous">
         <parent link="base_link"/> <!-- 父链接为车体 -->
         <child link="back_fork"/> <!-- 子链接为叉架 -->
-        <origin xyz="-0.264 0 0.0169" rpy="0 0 0"/> <!-- 叉架相对于车体的原点和姿态 -->
+        <origin xyz="-0.264 0 0.0369" rpy="0 0 0"/> <!-- 叉架相对于车体的原点和姿态 -->
         <axis xyz="0 0 1"/> <!-- 允许叉架围绕 Z 轴自由旋转（万向功能） -->
     </joint>
 
@@ -182,7 +182,7 @@
     <joint name="front_fork_to_front_caster" type="continuous">
         <parent link="front_fork" />
         <child link="front_caster" />
-        <origin xyz="-0.012 0 -0.0209"/> <!-- 前万向轮放置在底盘前部，离地适中 -->
+        <origin xyz="-0.012 0 -0.0009"/> <!-- 前万向轮放置在底盘前部，离地适中 -->
         <axis xyz="0 1 0"/> <!-- 前万向轮自由旋转 -->
     </joint>
 
@@ -205,7 +205,7 @@
     <joint name="back_fork_to_back_caster" type="continuous">
         <parent link="back_fork" />
         <child link="back_caster" />
-        <origin xyz="-0.012 0 -0.0209"/> <!-- 后万向轮放置在底盘后部，对称于前万向轮 -->
+        <origin xyz="-0.012 0 -0.0009"/> <!-- 后万向轮放置在底盘后部，对称于前万向轮 -->
         <axis xyz="0 1 0"/> <!-- 后万向轮自由旋转 -->
     </joint>
 
@@ -236,7 +236,7 @@
     <joint name="base_link_to_laser" type="fixed">
         <parent link="base_link"/>
         <child link="laser"/>
-        <origin xyz="0.2815 0 0.15223265" rpy="0 0 ${pi}"/> <!-- 激光雷达相对于车体的原点和姿态 -->
+        <origin xyz="0.2815 0 0.17223265" rpy="0 0 ${pi}"/> <!-- 激光雷达相对于车体的原点和姿态 -->
     </joint>
 
 </robot>
