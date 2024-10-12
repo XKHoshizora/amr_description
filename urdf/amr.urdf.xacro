@@ -113,6 +113,12 @@
 
 
     <!-- 前后万向轮叉架 -->
+    <!-- 
+        参数说明:
+            - 颜色: 灰色
+            - STL 网格文件: front_fork.stl
+                            back_fork.stl
+    -->
     <link name="front_fork">
         <visual>
             <geometry>
