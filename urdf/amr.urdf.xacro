@@ -84,7 +84,7 @@
     <joint name="base_link_to_left_wheel" type="continuous"> <!-- 关节类型为 continuous 表示连续旋转 -->
         <parent link="base_link" />
         <child link="left_wheel" />
-        <origin xyz="0 -0.23215 0.09"/> <!-- 根据底盘和轮子尺寸设置左轮的位置和离地距离 -->
+        <origin xyz="0 0.23215 0.09"/> <!-- 根据底盘和轮子尺寸设置左轮的位置和离地距离 -->
         <axis xyz="0 1 0" /> <!-- 左轮沿 y 轴旋转 -->
     </joint>
 
@@ -107,7 +107,7 @@
     <joint name="base_link_to_right_wheel" type="continuous">
         <parent link="base_link" />
         <child link="right_wheel" />
-        <origin xyz="0 0.23215 0.09"/>
+        <origin xyz="0 -0.23215 0.09"/>
         <axis xyz="0 1 0" /> <!-- 右轮沿 y 轴旋转 -->
     </joint>
 
